@@ -42,7 +42,7 @@ public class OrderConfirmOperation implements OperationHandler {
 				return or;
 			}
 
-			owner = oa.getOwner();
+			owner = oa.getSupplier().getTrader();
 			idSet.add(oa.getOwner().getId());
 		}
 

@@ -1,17 +1,23 @@
 package simple.order.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
@@ -72,18 +78,25 @@ public class SalesOrderDetail implements Serializable {
 	private Long orderQuantity;
 
 	@Column(name = "CONFIRM_QUANTITY", columnDefinition = "NUMERIC(12,0)")
-	@Title("送货数量")
+	@Title("确认数量")
 	@RepresentationField(sort = 60)
 	@TableColumn
 	@DecimalMax("999999999999")
 	private Long confirmQuantity;
 
-	@ManyToOne
-	@JoinColumn(name = "DELIVERY_ORDER_ID")
-	@RepresentationField(sort = 30, title = "发货单", view = RepresentationFieldType.REFERENCE, isSearchField = true, visable = false)
-	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "发货单", columns = "orderNumber")
-	private DeliveryOrder deliveryOrder;
+	// @ManyToOne
+	// @JoinColumn(name = "DELIVERY_ORDER_DETAIL_ID")
+	// @RepresentationField(sort = 30, title = "发货单", view =
+	// RepresentationFieldType.REFERENCE, isSearchField = true, visable = false)
+	// @Reference(id = "id", label = "orderNumber")
+	// @AssociateTableColumn(sorts = "30", titles = "发货单", columns =
+	// "orderNumber")
+	// private DeliveryOrderDetail deliveryOrderDetail;
+
+	@OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)
+	@Cascade({ CascadeType.ALL })
+	@TableColumn(title = "发货单号", handler = "simple.order.support.SalesDeliveryNumberTableColumnHandler")
+	private Set<DeliveryOrderDetail> deliveryOrders = new HashSet<DeliveryOrderDetail>(0);
 
 	public Long getId() {
 		return id;
@@ -123,6 +136,14 @@ public class SalesOrderDetail implements Serializable {
 
 	public void setConfirmQuantity(Long confirmQuantity) {
 		this.confirmQuantity = confirmQuantity;
+	}
+
+	public Set<DeliveryOrderDetail> getDeliveryOrders() {
+		return deliveryOrders;
+	}
+
+	public void setDeliveryOrders(Set<DeliveryOrderDetail> deliveryOrders) {
+		this.deliveryOrders = deliveryOrders;
 	}
 
 }

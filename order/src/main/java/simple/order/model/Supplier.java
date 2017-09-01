@@ -60,4 +60,28 @@ public class Supplier implements Serializable {
 	@AutoFill(trigger = AutoFillTrigger.ALWAYS, handler = OwnerAutoFillHandler.class)
 	private Trader owner;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Trader getTrader() {
+		return trader;
+	}
+
+	public void setTrader(Trader trader) {
+		this.trader = trader;
+	}
+
+	public Trader getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Trader owner) {
+		this.owner = owner;
+	}
+
 }

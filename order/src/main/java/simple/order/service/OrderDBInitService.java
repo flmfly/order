@@ -72,9 +72,8 @@ public class OrderDBInitService implements InitializingBean {
 		bm.setIconCss("fa fa-puzzle-piece");
 		bm.setSort(3000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_orderconfirm", "销售单管理", "/list/orderconfirm", "30000001", "fa fa-user-secret", 100, bm);
-		this.saveMenu("order_salesorderdetial", "送货计划管理", "/list/salesorderdetial", "30000002", "fa fa-rocket", 200,
-				bm);
+		this.saveMenu("order_orderconfirm", "销售单确认", "/list/orderconfirm", "30000001", "fa fa-user-secret", 100, bm);
+		this.saveMenu("order_salesorder", "销售单管理", "/list/salesorder", "30000002", "fa fa-rocket", 200, bm);
 		this.saveMenu("order_salesorderview", "销售单统计", "/list/salesorderview", "30000003", "fa fa-cubes", 300, bm);
 
 		bm = new BaseMenu();
@@ -83,7 +82,9 @@ public class OrderDBInitService implements InitializingBean {
 		bm.setIconCss("fa fa-puzzle-piece");
 		bm.setSort(4000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_delivery", "发货管理", "/list/delivery", "40000001", "fa fa-user-secret", 100, bm);
+		this.saveMenu("order_salesorderdetail", "发货", "/list/salesorderdetail", "40000001", "fa fa-user-secret", 100,
+				bm);
+		this.saveMenu("order_deliveryorder", "发货单管理", "/list/deliveryorder", "40000501", "fa fa-user-secret", 150, bm);
 		this.saveMenu("order_receiving", "收货管理", "/list/receiving", "40000002", "fa fa-rocket", 200, bm);
 
 		// bm = new BaseMenu();

@@ -25,7 +25,7 @@ import simple.config.annotation.RepresentationFieldType;
 import simple.config.annotation.TableColumn;
 import simple.config.annotation.Title;
 
-@Domain(value = "订单明细")
+@Domain(value = "发货单明细")
 @Entity
 @Table(name = "ORDER_DELIVERY_DETAIL")
 @SequenceGenerator(name = "SEQ_ORDER_DELIVERY_DETAIL", sequenceName = "SEQ_ORDER_DELIVERY_DETAIL")
@@ -59,7 +59,7 @@ public class DeliveryOrderDetail implements Serializable {
 	@Title("送货数量")
 	@RepresentationField(sort = 60)
 	@DecimalMax("999999999999")
-	private Long orderQuantity;
+	private Long confirmQuantity;
 
 	@Column(name = "SHIP_QUANTITY", columnDefinition = "NUMERIC(12,0)")
 	@Title("实发数量")
@@ -73,5 +73,53 @@ public class DeliveryOrderDetail implements Serializable {
 	@Reference(id = "id", label = "orderNumber")
 	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "orderNumber")
 	private SalesOrder salesOrder;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public DeliveryOrder getOrder() {
+		return order;
+	}
+
+	public void setOrder(DeliveryOrder order) {
+		this.order = order;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public Long getConfirmQuantity() {
+		return confirmQuantity;
+	}
+
+	public void setConfirmQuantity(Long confirmQuantity) {
+		this.confirmQuantity = confirmQuantity;
+	}
+
+	public Long getShipQuantity() {
+		return shipQuantity;
+	}
+
+	public void setShipQuantity(Long shipQuantity) {
+		this.shipQuantity = shipQuantity;
+	}
+
+	public SalesOrder getSalesOrder() {
+		return salesOrder;
+	}
+
+	public void setSalesOrder(SalesOrder salesOrder) {
+		this.salesOrder = salesOrder;
+	}
 
 }

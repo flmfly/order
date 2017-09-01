@@ -39,7 +39,7 @@ import simple.config.annotation.TableColumn;
 import simple.config.annotation.Title;
 import simple.order.support.OwnerAutoFillHandler;
 
-@Domain(defaultSort = "-orderDate", value = "订单")
+@Domain(defaultSort = "-deliveryDate", value = "发货单")
 @DataFilter(by = "owner", valueProperty = "trader")
 @Entity
 @Table(name = "ORDER_DELIVERY")
@@ -107,5 +107,77 @@ public class DeliveryOrder implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "BUYER_ID")
 	private Trader buyer;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public String getLogisticsVendor() {
+		return logisticsVendor;
+	}
+
+	public void setLogisticsVendor(String logisticsVendor) {
+		this.logisticsVendor = logisticsVendor;
+	}
+
+	public String getLogisticsNumber() {
+		return logisticsNumber;
+	}
+
+	public void setLogisticsNumber(String logisticsNumber) {
+		this.logisticsNumber = logisticsNumber;
+	}
+
+	public BaseDictItem getState() {
+		return state;
+	}
+
+	public void setState(BaseDictItem state) {
+		this.state = state;
+	}
+
+	public Set<DeliveryOrderDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Set<DeliveryOrderDetail> details) {
+		this.details = details;
+	}
+
+	public Trader getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Trader owner) {
+		this.owner = owner;
+	}
+
+	public Trader getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(Trader buyer) {
+		this.buyer = buyer;
+	}
 
 }
