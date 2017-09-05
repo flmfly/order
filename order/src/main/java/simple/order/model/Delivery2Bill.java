@@ -23,27 +23,24 @@ import simple.config.annotation.DataLength;
 import simple.config.annotation.Domain;
 import simple.config.annotation.Operation;
 import simple.config.annotation.OperationParameter;
-import simple.config.annotation.OperationParameterType;
 import simple.config.annotation.OperationTarget;
 import simple.config.annotation.Reference;
 import simple.config.annotation.RepresentationField;
 import simple.config.annotation.RepresentationFieldType;
 import simple.config.annotation.TableColumn;
 import simple.config.annotation.Title;
-import simple.order.support.DeliveryConfirmOperation;
+import simple.order.support.BillGenerateOperation;
 
 @Domain(value = "发货单明细")
 @DataFilter(by = "order.owner", valueProperty = "trader")
 @Entity
 @Table(name = "ORDER_DELIVERY_DETAIL")
-@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = DeliveryConfirmOperation.class, multi = true, name = "确认收货", target = OperationTarget.ALL, parameters = {
-		@OperationParameter(type = OperationParameterType.FIELD, code = "iqcNumber"),
-		@OperationParameter(type = OperationParameterType.FIELD, code = "iqc"),
-		@OperationParameter(code = "receive_num", multi = true, multiViewProperty = "productName") })
+@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = BillGenerateOperation.class, multi = false, name = "生成账单", target = OperationTarget.ALL, parameters = {
+		@OperationParameter(title = "应收金额", code = "amount") })
 @SequenceGenerator(name = "SEQ_ORDER_DELIVERY_DETAIL", sequenceName = "SEQ_ORDER_DELIVERY_DETAIL")
 @GenericGenerator(name = "idStrategy", strategy = "native", parameters = {
 		@Parameter(name = "sequence", value = "SEQ_ORDER_DELIVERY_DETAIL") })
-public class DeliveryOrderDetail implements Serializable {
+public class Delivery2Bill implements Serializable {
 
 	private static final long serialVersionUID = 4364629901095352378L;
 

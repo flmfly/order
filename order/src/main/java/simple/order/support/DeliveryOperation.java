@@ -77,7 +77,7 @@ public class DeliveryOperation implements OperationHandler {
 
 			DeliveryOrderDetail dod = new DeliveryOrderDetail();
 			dod.setConfirmQuantity(oa.getConfirmQuantity());
-			dod.setSalesOrder(oa.getOrder());
+			dod.setSalesOrderDetail(oa);
 			dod.setOrder(deliveryOrder);
 			dod.setProductName(oa.getProductName());
 			try {

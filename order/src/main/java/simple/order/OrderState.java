@@ -9,5 +9,4 @@ public interface OrderState {
 	public static final String ORDER_STATE_SHIPPED_CODE = "ORDER_STATE_SHIPPED";
 	public static final String ORDER_STATE_SIGNED_CODE = "ORDER_STATE_SIGNED";
 	public static final String ORDER_STATE_FINISHED_CODE = "ORDER_STATE_FINISHED";
-
 }

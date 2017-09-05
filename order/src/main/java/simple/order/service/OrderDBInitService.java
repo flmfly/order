@@ -85,7 +85,22 @@ public class OrderDBInitService implements InitializingBean {
 		this.saveMenu("order_salesorderdetail", "发货", "/list/salesorderdetail", "40000001", "fa fa-user-secret", 100,
 				bm);
 		this.saveMenu("order_deliveryorder", "发货单管理", "/list/deliveryorder", "40000501", "fa fa-user-secret", 150, bm);
-		this.saveMenu("order_receiving", "收货管理", "/list/receiving", "40000002", "fa fa-rocket", 200, bm);
+		this.saveMenu("order_deliveryorderdetail", "收货管理", "/list/deliveryorderdetail", "40000002", "fa fa-rocket", 200,
+				bm);
+
+		bm = new BaseMenu();
+		bm.setCode("50000");
+		bm.setName("财务管理");
+		bm.setIconCss("fa fa-puzzle-piece");
+		bm.setSort(4000);
+		bm = this.insertIfNotExist(bm, "code", bm.getCode());
+		this.saveMenu("order_delivery2bill", "确认应收", "/list/delivery2bill", "40000001", "fa fa-user-secret", 100, bm);
+		// this.saveMenu("order_deliveryorder", "应收确认", "/list/deliveryorder",
+		// "40000002", "fa fa-user-secret", 200, bm);
+		this.saveMenu("order_billpaidConfirm", "应收管理", "/list/billpaidConfirm", "40000003", "fa fa-rocket", 300, bm);
+		this.saveMenu("order_bill", "应付管理", "/list/bill", "40000004", "fa fa-user-secret", 400, bm);
+		// this.saveMenu("order_deliveryorder", "清账", "/list/deliveryorder",
+		// "40000005", "fa fa-user-secret", 500, bm);
 
 		// bm = new BaseMenu();
 		// bm.setCode("50000");
@@ -220,7 +235,6 @@ public class OrderDBInitService implements InitializingBean {
 		}
 
 		return t;
-
 	}
 
 }
