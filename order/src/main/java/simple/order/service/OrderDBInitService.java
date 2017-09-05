@@ -50,55 +50,55 @@ public class OrderDBInitService implements InitializingBean {
 		bm.setIconCss("fa fa-database");
 		bm.setSort(1000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_producttobuy", "商品管理", "/list/product", "10000001", "fa fa-rocket", 100, bm);
-		this.saveMenu("order_product", "采购商品管理", "/list/producttobuy", "10000002", "fa fa-excel-o", 200, bm);
-		this.saveMenu("order_supplier", "供应商管理", "/list/supplier", "10000003", "fa fa-link", 300, bm);
-		this.saveMenu("order_customer", "客户管理", "/list/customer", "10000004", "fa fa-link", 400, bm);
-		this.saveMenu("order_trader", "商家管理", "/list/trader", "10000999", "fa fa-link", 999, bm);
+		this.saveMenu("order_producttobuy", "商品管理", "/list/product", "10000001", "fa fa-cubes", 100, bm);
+		this.saveMenu("order_product", "采购商品管理", "/list/producttobuy", "10000002", "fa fa-cube", 200, bm);
+		this.saveMenu("order_supplier", "供应商管理", "/list/supplier", "10000003", "fa fa-user", 300, bm);
+		this.saveMenu("order_customer", "客户管理", "/list/customer", "10000004", "fa fa-user", 400, bm);
+		this.saveMenu("order_trader", "商家管理", "/list/trader", "10000999", "fa fa-user", 999, bm);
 
 		bm = new BaseMenu();
 		bm.setCode("20000");
 		bm.setName("采购管理");
-		bm.setIconCss("fa fa-puzzle-piece");
+		bm.setIconCss("fa fa-truck");
 		bm.setSort(2000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_order", "建议采购单", "/list/order", "20000001", "fa fa-user-secret", 100, bm);
-		this.saveMenu("order_orderapprove", "采购单管理", "/list/orderapprove", "20000002", "fa fa-rocket", 200, bm);
-		this.saveMenu("order_orderview", "采购单统计", "/list/orderview", "20000003", "fa fa-cubes", 300, bm);
+		this.saveMenu("order_order", "建议采购单", "/list/order", "20000001", "fa fa-clipboard", 100, bm);
+		this.saveMenu("order_orderapprove", "采购单管理", "/list/orderapprove", "20000002", "fa fa-clipboard", 200, bm);
+		this.saveMenu("order_orderview", "采购单统计", "/list/orderview", "20000003", "fa fa-bar-chart", 300, bm);
 
 		bm = new BaseMenu();
 		bm.setCode("30000");
 		bm.setName("销售管理");
-		bm.setIconCss("fa fa-puzzle-piece");
+		bm.setIconCss("fa fa-flag-o");
 		bm.setSort(3000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_orderconfirm", "销售单确认", "/list/orderconfirm", "30000001", "fa fa-user-secret", 100, bm);
-		this.saveMenu("order_salesorder", "销售单管理", "/list/salesorder", "30000002", "fa fa-rocket", 200, bm);
-		this.saveMenu("order_salesorderview", "销售单统计", "/list/salesorderview", "30000003", "fa fa-cubes", 300, bm);
+		this.saveMenu("order_orderconfirm", "销售单确认", "/list/orderconfirm", "30000001", "fa fa-clipboard", 100, bm);
+		this.saveMenu("order_salesorder", "销售单管理", "/list/salesorder", "30000002", "fa fa-clipboard", 200, bm);
+		this.saveMenu("order_salesorderview", "销售单统计", "/list/salesorderview", "30000003", "fa fa-bar-chart", 300, bm);
 
 		bm = new BaseMenu();
 		bm.setCode("40000");
 		bm.setName("仓库管理");
-		bm.setIconCss("fa fa-puzzle-piece");
+		bm.setIconCss("fa fa-cubes");
 		bm.setSort(4000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_salesorderdetail", "发货", "/list/salesorderdetail", "40000001", "fa fa-user-secret", 100,
+		this.saveMenu("order_salesorderdetail", "发货", "/list/salesorderdetail", "40000001", "fa fa-ship", 100,
 				bm);
-		this.saveMenu("order_deliveryorder", "发货单管理", "/list/deliveryorder", "40000501", "fa fa-user-secret", 150, bm);
-		this.saveMenu("order_deliveryorderdetail", "收货管理", "/list/deliveryorderdetail", "40000002", "fa fa-rocket", 200,
+		this.saveMenu("order_deliveryorder", "发货单管理", "/list/deliveryorder", "40000501", "fa fa-ship", 150, bm);
+		this.saveMenu("order_deliveryorderdetail", "收货管理", "/list/deliveryorderdetail", "40000002", "fa fa-handshake-o", 200,
 				bm);
 
 		bm = new BaseMenu();
 		bm.setCode("50000");
 		bm.setName("财务管理");
-		bm.setIconCss("fa fa-puzzle-piece");
+		bm.setIconCss("fa fa-yen");
 		bm.setSort(4000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_delivery2bill", "确认应收", "/list/delivery2bill", "40000001", "fa fa-user-secret", 100, bm);
+		this.saveMenu("order_delivery2bill", "确认应收", "/list/delivery2bill", "40000001", "fa fa-check", 100, bm);
 		// this.saveMenu("order_deliveryorder", "应收确认", "/list/deliveryorder",
 		// "40000002", "fa fa-user-secret", 200, bm);
-		this.saveMenu("order_billpaidConfirm", "应收管理", "/list/billpaidConfirm", "40000003", "fa fa-rocket", 300, bm);
-		this.saveMenu("order_bill", "应付管理", "/list/bill", "40000004", "fa fa-user-secret", 400, bm);
+		this.saveMenu("order_bill", "应付管理", "/list/bill", "40000004", "fa fa-credit-card", 400, bm);
+		this.saveMenu("order_billpaidConfirm", "应收管理", "/list/billpaidConfirm", "40000005", "fa fa-thumbs-o-up", 500, bm);
 		// this.saveMenu("order_deliveryorder", "清账", "/list/deliveryorder",
 		// "40000005", "fa fa-user-secret", 500, bm);
 
