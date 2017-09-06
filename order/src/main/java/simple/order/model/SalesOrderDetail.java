@@ -93,7 +93,7 @@ public class SalesOrderDetail implements Serializable {
 	// "orderNumber")
 	// private DeliveryOrderDetail deliveryOrderDetail;
 
-	@OneToMany(mappedBy = "salesOrder", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "salesOrderDetail", fetch = FetchType.LAZY)
 	@Cascade({ CascadeType.ALL })
 	@TableColumn(title = "发货单号", handler = "simple.order.support.SalesDeliveryNumberTableColumnHandler")
 	private Set<DeliveryOrderDetail> deliveryOrders = new HashSet<DeliveryOrderDetail>(0);

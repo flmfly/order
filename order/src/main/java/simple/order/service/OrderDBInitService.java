@@ -98,7 +98,7 @@ public class OrderDBInitService implements InitializingBean {
 		// this.saveMenu("order_deliveryorder", "应收确认", "/list/deliveryorder",
 		// "40000002", "fa fa-user-secret", 200, bm);
 		this.saveMenu("order_bill", "应付管理", "/list/bill", "40000004", "fa fa-credit-card", 400, bm);
-		this.saveMenu("order_billpaidConfirm", "应收管理", "/list/billpaidConfirm", "40000005", "fa fa-thumbs-o-up", 500, bm);
+		this.saveMenu("order_billpaidconfirm", "应收管理", "/list/billpaidconfirm", "40000005", "fa fa-thumbs-o-up", 500, bm);
 		// this.saveMenu("order_deliveryorder", "清账", "/list/deliveryorder",
 		// "40000005", "fa fa-user-secret", 500, bm);
 

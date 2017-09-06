@@ -42,9 +42,9 @@ import simple.order.support.OwnerAutoFillHandler;
 		@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = BillConfirmOperation.class, multi = true, name = "账单确认", target = OperationTarget.ALL),
 		@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = BillPaidOperation.class, multi = true, name = "清账", target = OperationTarget.ALL) })
 
-@SequenceGenerator(name = "SEQ_ORDER_DELIVERY_DETAIL", sequenceName = "SEQ_ORDER_DELIVERY_DETAIL")
+@SequenceGenerator(name = "SEQ_ORDER_BILL", sequenceName = "SEQ_BILL")
 @GenericGenerator(name = "idStrategy", strategy = "native", parameters = {
-		@Parameter(name = "sequence", value = "SEQ_ORDER_DELIVERY_DETAIL") })
+		@Parameter(name = "sequence", value = "SEQ_ORDER_BILL") })
 public class Bill implements Serializable {
 
 	private static final long serialVersionUID = 4364629901095352378L;
@@ -68,6 +68,7 @@ public class Bill implements Serializable {
 	@Column(name = "BILL_AMOUNT", columnDefinition = "NUMERIC(12,2)")
 	@Title("账单金额")
 	@RepresentationField(sort = 60)
+	@TableColumn(sort=60)
 	@DecimalMax("999999999999")
 	private Double billAmount;
 
@@ -75,24 +76,30 @@ public class Bill implements Serializable {
 	@JoinColumn(name = "DELIVERY_ORDER_ID")
 	@RepresentationField(sort = 30, title = "发货单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
 	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "发货单", columns = "orderNumber")
+	@AssociateTableColumn(sorts = "30,31,32", titles = "发货单,实发数量,收货数量", columns = "order.orderNumber,shipQuantity,iqcQuantity")
 	private Delivery2Bill deliveryOrder;
 
 	@Column(name = "BUYER_CONFIRM", columnDefinition = "CHAR(1)")
+	@Title("买家已确认")
 	@RepresentationField(sort = 80, title = "买家已确认", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean buyerConfirm;
 
 	@Column(name = "PAID", columnDefinition = "CHAR(1)")
+	@Title("买家已付款")
 	@RepresentationField(sort = 80, title = "买家已付款", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean paid;
 
 	@Column(name = "PAID_CONFIRM", columnDefinition = "CHAR(1)")
+	@Title("确认付款")
 	@RepresentationField(sort = 80, title = "确认付款", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean paidConfirm;
 

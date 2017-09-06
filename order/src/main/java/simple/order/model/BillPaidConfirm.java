@@ -15,14 +15,12 @@ import javax.validation.constraints.DecimalMax;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.hibernate.validator.constraints.Length;
 
 import simple.config.annotation.AssociateTableColumn;
 import simple.config.annotation.AutoFill;
 import simple.config.annotation.AutoFillTrigger;
 import simple.config.annotation.BooleanValue;
 import simple.config.annotation.DataFilter;
-import simple.config.annotation.DataLength;
 import simple.config.annotation.Domain;
 import simple.config.annotation.Operation;
 import simple.config.annotation.OperationTarget;
@@ -41,9 +39,9 @@ import simple.order.support.OwnerAutoFillHandler;
 @Table(name = "ORDER_BILL")
 @Operation.List({
 		@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = BillPaidConfirmOperation.class, multi = true, name = "账单到账", target = OperationTarget.ALL) })
-@SequenceGenerator(name = "SEQ_ORDER_DELIVERY_DETAIL", sequenceName = "SEQ_ORDER_DELIVERY_DETAIL")
+@SequenceGenerator(name = "SEQ_ORDER_BILL", sequenceName = "SEQ_ORDER_BILL")
 @GenericGenerator(name = "idStrategy", strategy = "native", parameters = {
-		@Parameter(name = "sequence", value = "SEQ_ORDER_DELIVERY_DETAIL") })
+		@Parameter(name = "sequence", value = "SEQ_ORDER_BILL") })
 public class BillPaidConfirm implements Serializable {
 
 	private static final long serialVersionUID = 4364629901095352378L;
@@ -64,59 +62,41 @@ public class BillPaidConfirm implements Serializable {
 	@JoinColumn(name = "BUYER_ID")
 	private Trader buyer;
 
-	@Column(name = "PRODUCT_NAME", length = DataLength.NAME_LENGTH)
-	@RepresentationField(sort = 20, title = "产品名称", isSearchField = true, disable = true)
-	@TableColumn(title = "产品名称")
-	@Length(max = DataLength.NAME_LENGTH)
-	private String productName;
-
 	@Column(name = "BILL_AMOUNT", columnDefinition = "NUMERIC(12,2)")
 	@Title("账单金额")
 	@RepresentationField(sort = 60)
+	@TableColumn(sort = 60)
 	@DecimalMax("999999999999")
 	private Double billAmount;
-
-	@Column(name = "SHIP_QUANTITY", columnDefinition = "NUMERIC(12,0)")
-	@Title("实发数量")
-	@RepresentationField(sort = 60)
-	@DecimalMax("999999999999")
-	private Long shipQuantity;
-
-	@Column(name = "IQC_QUANTITY", columnDefinition = "NUMERIC(12,0)")
-	@Title("收货数量")
-	@RepresentationField(sort = 60)
-	@DecimalMax("999999999999")
-	private Long iqcQuantity;
-
-	@ManyToOne
-	@JoinColumn(name = "SALES_ORDER_DETAIL_ID")
-	@RepresentationField(sort = 30, title = "订单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
-	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "orderNumber")
-	private SalesOrderDetail salesOrderDetail;
 
 	@ManyToOne
 	@JoinColumn(name = "DELIVERY_ORDER_ID")
 	@RepresentationField(sort = 30, title = "发货单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
 	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "发货单", columns = "orderNumber")
-	private DeliveryOrder deliveryOrder;
+	@AssociateTableColumn(sorts = "30,31,32", titles = "发货单,实发数量,收货数量", columns = "order.orderNumber,shipQuantity,iqcQuantity")
+	private Delivery2Bill deliveryOrder;
 
 	@Column(name = "BUYER_CONFIRM", columnDefinition = "CHAR(1)")
+	@Title("买家已确认")
 	@RepresentationField(sort = 80, title = "买家已确认", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean buyerConfirm;
 
 	@Column(name = "PAID", columnDefinition = "CHAR(1)")
+	@Title("买家已付款")
 	@RepresentationField(sort = 80, title = "买家已付款", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean paid;
 
 	@Column(name = "PAID_CONFIRM", columnDefinition = "CHAR(1)")
+	@Title("确认付款")
 	@RepresentationField(sort = 80, title = "确认付款", view = RepresentationFieldType.BOOLEAN, defaultVal = "false")
 	@BooleanValue({ "是", "否" })
+	@TableColumn(sort = 60)
 	@Convert(converter = BooleanToStringConverter.class)
 	private Boolean paidConfirm;
 
@@ -126,38 +106,6 @@ public class BillPaidConfirm implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public Long getShipQuantity() {
-		return shipQuantity;
-	}
-
-	public void setShipQuantity(Long shipQuantity) {
-		this.shipQuantity = shipQuantity;
-	}
-
-	public SalesOrderDetail getSalesOrderDetail() {
-		return salesOrderDetail;
-	}
-
-	public void setSalesOrderDetail(SalesOrderDetail salesOrderDetail) {
-		this.salesOrderDetail = salesOrderDetail;
-	}
-
-	public Long getIqcQuantity() {
-		return iqcQuantity;
-	}
-
-	public void setIqcQuantity(Long iqcQuantity) {
-		this.iqcQuantity = iqcQuantity;
 	}
 
 	public Trader getOwner() {
@@ -184,11 +132,11 @@ public class BillPaidConfirm implements Serializable {
 		this.billAmount = billAmount;
 	}
 
-	public DeliveryOrder getDeliveryOrder() {
+	public Delivery2Bill getDeliveryOrder() {
 		return deliveryOrder;
 	}
 
-	public void setDeliveryOrder(DeliveryOrder deliveryOrder) {
+	public void setDeliveryOrder(Delivery2Bill deliveryOrder) {
 		this.deliveryOrder = deliveryOrder;
 	}
 
