@@ -18,7 +18,7 @@ public class DeliveryConfirmOperation implements OperationHandler {
 
 	@Override
 	public boolean disabled(Object domain) {
-		return false;
+		return null != ((Map<?, ?>) domain).get("iqcQuantity");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -28,8 +28,8 @@ public class DeliveryConfirmOperation implements OperationHandler {
 		Map<String, Object> valMap = (Map<String, Object>) parameters.get("receive_num");
 		for (Object obj : domains) {
 			DeliveryOrderDetail oa = (DeliveryOrderDetail) obj;
-			oa.setIqc((Boolean) parameters.get("ipc"));
-			oa.setIqcNumber((String) parameters.get("ipc"));
+			oa.setIqc((Boolean) parameters.get("iqc"));
+			oa.setIqcNumber((String) parameters.get("iqcNumber"));
 			try {
 				oa.setIqcQuantity(Long.parseLong((String) valMap.get(String.valueOf(oa.getId()))));
 			} catch (Exception e) {

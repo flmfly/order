@@ -94,11 +94,11 @@ public class OrderDBInitService implements InitializingBean {
 		bm.setIconCss("fa fa-yen");
 		bm.setSort(4000);
 		bm = this.insertIfNotExist(bm, "code", bm.getCode());
-		this.saveMenu("order_delivery2bill", "确认应收", "/list/delivery2bill", "40000001", "fa fa-check", 100, bm);
+		this.saveMenu("order_delivery2bill", "确认应收", "/list/delivery2bill", "50000001", "fa fa-check", 100, bm);
 		// this.saveMenu("order_deliveryorder", "应收确认", "/list/deliveryorder",
 		// "40000002", "fa fa-user-secret", 200, bm);
-		this.saveMenu("order_bill", "应付管理", "/list/bill", "40000004", "fa fa-credit-card", 400, bm);
-		this.saveMenu("order_billpaidconfirm", "应收管理", "/list/billpaidconfirm", "40000005", "fa fa-thumbs-o-up", 500, bm);
+		this.saveMenu("order_bill", "应付管理", "/list/bill", "50000004", "fa fa-credit-card", 400, bm);
+		this.saveMenu("order_billpaidconfirm", "应收管理", "/list/billpaidconfirm", "50000005", "fa fa-thumbs-o-up", 500, bm);
 		// this.saveMenu("order_deliveryorder", "清账", "/list/deliveryorder",
 		// "40000005", "fa fa-user-secret", 500, bm);
 

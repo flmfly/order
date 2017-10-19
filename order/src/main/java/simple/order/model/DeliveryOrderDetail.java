@@ -28,15 +28,17 @@ import simple.config.annotation.OperationTarget;
 import simple.config.annotation.Reference;
 import simple.config.annotation.RepresentationField;
 import simple.config.annotation.RepresentationFieldType;
+import simple.config.annotation.StandardOperation;
 import simple.config.annotation.TableColumn;
 import simple.config.annotation.Title;
 import simple.order.support.DeliveryConfirmOperation;
 
 @Domain(value = "发货单明细")
+@StandardOperation(modify = false, delete = false, imp = false, add = false)
 @DataFilter(by = "order.owner", valueProperty = "trader")
 @Entity
 @Table(name = "ORDER_DELIVERY_DETAIL")
-@Operation(code = "refresh", iconStyle = "fa fa-refresh", handler = DeliveryConfirmOperation.class, multi = true, name = "确认收货", target = OperationTarget.ALL, parameters = {
+@Operation(code = "refresh", iconStyle = "green fa fa-check", handler = DeliveryConfirmOperation.class, multi = false, name = "确认收货", target = OperationTarget.ALL, parameters = {
 		@OperationParameter(type = OperationParameterType.FIELD, code = "iqcNumber"),
 		@OperationParameter(type = OperationParameterType.FIELD, code = "iqc"),
 		@OperationParameter(code = "receive_num", multi = true, multiViewProperty = "productName") })
@@ -56,9 +58,9 @@ public class DeliveryOrderDetail implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ORDER_ID")
-	@RepresentationField(sort = 30, title = "订单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
+	@RepresentationField(sort = 30, title = "发货单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
 	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "orderNumber")
+	@AssociateTableColumn(sorts = "30", titles = "发货单", columns = "orderNumber")
 	private DeliveryOrder order;
 
 	@Column(name = "PRODUCT_NAME", length = DataLength.NAME_LENGTH)
@@ -77,19 +79,21 @@ public class DeliveryOrderDetail implements Serializable {
 	@Title("实发数量")
 	@RepresentationField(sort = 60)
 	@DecimalMax("999999999999")
+	@TableColumn
 	private Long shipQuantity;
 
 	@Column(name = "IQC_QUANTITY", columnDefinition = "NUMERIC(12,0)")
 	@Title("收货数量")
 	@RepresentationField(sort = 60)
 	@DecimalMax("999999999999")
+	@TableColumn
 	private Long iqcQuantity;
 
 	@ManyToOne
 	@JoinColumn(name = "SALES_ORDER_DETAIL_ID")
 	@RepresentationField(sort = 30, title = "订单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
-	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "order.orderNumber")
+	@Reference(id = "id", label = "order.orderNumber")
+//	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "order.orderNumber")
 	private SalesOrderDetail salesOrderDetail;
 
 	@Column(name = "IQC")
@@ -101,7 +105,7 @@ public class DeliveryOrderDetail implements Serializable {
 
 	@Column(name = "IOC_NUMBER", length = DataLength.CODE_LENGTH)
 	@Title("质检单号")
-	@RepresentationField(sort = 20, isSearchField = true, disable = true)
+	@RepresentationField(sort = 20, isSearchField = true)
 	@TableColumn()
 	@Length(max = DataLength.CODE_LENGTH)
 	private String iqcNumber;

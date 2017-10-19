@@ -86,7 +86,7 @@ public class Delivery2Bill implements Serializable {
 	@JoinColumn(name = "SALES_ORDER_DETAIL_ID")
 	@RepresentationField(sort = 30, title = "订单", view = RepresentationFieldType.REFERENCE, isSearchField = true)
 	@Reference(id = "id", label = "orderNumber")
-	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "orderNumber")
+	@AssociateTableColumn(sorts = "30", titles = "订单", columns = "order.orderNumber")
 	private SalesOrderDetail salesOrderDetail;
 
 	@Column(name = "IQC")
